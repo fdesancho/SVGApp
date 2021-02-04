@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30413.136
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SVGApp", "SVGApp\SVGApp.csproj", "{0EB4B6E8-9AF2-4358-9631-7BAA746758FC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0EB4B6E8-9AF2-4358-9631-7BAA746758FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0EB4B6E8-9AF2-4358-9631-7BAA746758FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0EB4B6E8-9AF2-4358-9631-7BAA746758FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0EB4B6E8-9AF2-4358-9631-7BAA746758FC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D51B2F82-9D5D-4056-AEA5-86867C27C264}
+	EndGlobalSection
+EndGlobal

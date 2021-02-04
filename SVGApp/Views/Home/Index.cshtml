@@ -1,0 +1,90 @@
+﻿
+<h1>Transform SVG</h1>
+<br />
+<div class="row">
+    <div class="col-md-12">
+        <form enctype="multipart/form-data" method="post"  class="form-horizontal" id="FormData">
+            <div class="form-group">
+                <label class="col-md-3">File:</label>
+                <div class="col-md-9">
+                    <input type="file" name="File" id="File" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-3">Minimum Diagonal Size:</label>
+                <div class="col-md-9">
+                    <input type="text" name="MinDiag" id="MinDiag" class="form-control" />
+                </div>
+            </div>
+            <button type="submit" class="btn btn-info" >Process</button>
+        </form>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <h3>Original</h3>
+        <div id="OriginalSvg" class="text-center">
+        </div>
+    </div>
+    <div class="col-md-6">
+        <h3>Result</h3>
+        <div id="ResultSvg" class="text-center">
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        var url_api = '@Url.Content("~/Api/Image")';
+        var url_loading_img = '@Url.Content("~/Content/loading.gif")';
+        $(document).ready(function () {
+
+            $('input[type=file]').change(function () {
+                //$('[for=file]').html(this.files[0].name);
+                $("#OriginalSvg").html('')
+                $('<img>', {
+                    src: URL.createObjectURL(this.files[0]),
+                    class: 'img-responsive',
+                    style: 'border:1px solid'
+                }).appendTo($("#OriginalSvg"))
+            })
+
+            $('#FormData').submit(function (e) {
+                e.preventDefault();
+                $('button').attr('disabled', true);
+                $("#ResultSvg").html('')
+                $('<img>', {
+                    src: url_loading_img,
+                    class: 'img-responsive'
+                }).appendTo($("#ResultSvg"))
+                var m = $('#MinDiag').val();
+                var f = new FormData(document.getElementById('FormData'));
+                
+                $.ajax({
+                    url: url_api + (m != '' ? '?minDiag=' + m : ''),
+                    type: "post",
+                    dataType: "text",
+                    data: f,
+                    cache: false,
+                    processData: false,
+                    contentType: false ,
+                    success: function (res) {
+                        $("#ResultSvg").html('');
+                        $('<img>', {
+                            src: 'data:image/bmp;base64,' + JSON.parse(res),
+                            class: 'img-responsive',
+                            style: 'border:1px solid'
+                        }).appendTo($("#ResultSvg"))
+                        $('button').attr('disabled', false);
+                    },
+                    error: function (res) {
+                        $("#ResultSvg").html('');
+                        $("#ResultSvg").html('Error:' + res.responseText);
+                        $('button').attr('disabled', false);
+                    }
+                });
+                return false;
+            })
+        })
+    </script>
+}
